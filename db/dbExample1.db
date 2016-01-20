@@ -1,5 +1,5 @@
 record(aSub,"$(user):asub1") {
-	field(SNAM,"myAsubProcess")
+	field(SNAM,"variance")
 	field(SCAN,"1 second")
 	field(FTA, "ULONG")
 	field(FTC, "ULONG")

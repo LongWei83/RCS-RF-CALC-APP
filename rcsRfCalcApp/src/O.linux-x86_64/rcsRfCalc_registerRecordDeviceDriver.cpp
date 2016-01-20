@@ -175,7 +175,7 @@ epicsShareExtern reg_func pvar_func_arrInitialize, pvar_func_asSub,
     pvar_func_tsInitialize, pvar_func_register_func_myAsubInit,
     pvar_func_register_func_myAsubProcess,
     pvar_func_register_func_mySubInit,
-    pvar_func_register_func_mySubProcess;
+    pvar_func_register_func_mySubProcess, pvar_func_register_func_variance;
 
 epicsShareExtern int * const pvar_int_asCaDebug;
 epicsShareExtern int * const pvar_int_atExitDebug;
@@ -245,6 +245,7 @@ int rcsRfCalc_registerRecordDeviceDriver(DBBASE *pbase)
     pvar_func_register_func_myAsubProcess();
     pvar_func_register_func_mySubInit();
     pvar_func_register_func_mySubProcess();
+    pvar_func_register_func_variance();
     iocshRegisterVariable(vardefs);
     return 0;
 }

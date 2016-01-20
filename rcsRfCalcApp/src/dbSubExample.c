@@ -165,3 +165,4 @@ epicsRegisterFunction(mySubInit);
 epicsRegisterFunction(mySubProcess);
 epicsRegisterFunction(myAsubInit);
 epicsRegisterFunction(myAsubProcess);
+epicsRegisterFunction(variance);

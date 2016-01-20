@@ -96,7 +96,7 @@ static long myAsubProcess(aSubRecord *precord)
     return 0;
 }
 
-static long varianceSub(aSubRecord *precord)
+static long variance(aSubRecord *precord)
 {
     long i;
     unsigned long *a;
