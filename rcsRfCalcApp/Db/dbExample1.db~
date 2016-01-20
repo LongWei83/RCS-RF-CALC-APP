@@ -1,3 +1,21 @@
+record(aSub,"$(user):asub1") {
+	field(SNAM,"myAsubProcess")
+	field(SCAN,"1 second")
+	field(FTA, "ULONG")
+	field(FTC, "ULONG")
+	field(INPA, "100")
+	field(INPB, "rcs:cpci9110:wf_amp_skew NPP NMS")
+	field(FTB, "DOUBLE")
+	field(NOA, "1")
+	field(NOB, "2048")
+	field(NOC, "1")
+	field(NOVA, "2048")
+	field(FTVA, "DOUBLE")
+	field(NOVB, "2048")
+	field(FTVB, "DOUBLE")
+	field(NOVC, "2048")
+	field(FTVC, "DOUBLE")
+}
 record(ai, "$(user):aiExample")
 {
 	field(DESC, "Analog input")

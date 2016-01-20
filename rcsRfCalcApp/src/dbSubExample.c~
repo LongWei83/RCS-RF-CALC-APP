@@ -40,33 +40,44 @@ static long myAsubProcess(aSubRecord *precord)
     unsigned long *a;
     double *b;
     unsigned long *c;
+    unsigned long *d;
 
     unsigned long noa;
     unsigned long nob;
+    unsigned long noc;
 
-    double *pDest;
-    double *oDest;
+    double *aDest;
+    double *bDest;
+    double *cDest;
     
     a = (unsigned long *)precord->a;
     b = (double *)precord->b;
     c = (unsigned long *)precord->c;
-    pDest = (double *)precord->vala;
-    oDest = (double *)precord->valb;
 
+    aDest = (double *)precord->vala;
+    bDest = (double *)precord->valb;
+    cDest = (double *)precord->valc;
+
+    noa = precord->noa;
     nob = precord->nob;
+    noc = precord->noc;
 
     dbGetLink(&precord->inpa, DBR_ULONG, precord->a, 0, &noa);
     dbGetLink(&precord->inpb, DBR_DOUBLE, precord->b, 0, &nob);
 
     for(i=0;i<precord->nova;i++)
     {
-                if(c[0] == 0)
-                {
-                    pDest[i] = 0;
-                    oDest[i] = 0;
-                }
-                else
-                    pDest[i] = sqrt(oDest[i]*oDest[i] + b[i]*b[i]/c[0]);
+        if((c[0] > 0)&&(c[0] <= a[0]))
+        {
+            aDest[i] = sqrt(bDest[i]*bDest[i]*(c[0]-1)/c[0] + b[i]*b[i]/c[0]);
+            if(c[0] == a[0])
+                cDest[i] = aDest[i];
+        }
+        else
+        {
+            aDest[i] = 0;
+            bDest[i] = 0;
+        }
     }
 
     for(i=0;i<precord->noc;i++){
@@ -75,10 +86,75 @@ static long myAsubProcess(aSubRecord *precord)
             c[i]++;
         }
         else
+        {
             c[i] = 0;
+        }
     }
-    memcpy(oDest, pDest, nob);
 
+    memcpy(bDest, aDest, nob);
+    
+    return 0;
+}
+
+static long varianceSub(aSubRecord *precord)
+{
+    long i;
+    unsigned long *a;
+    double *b;
+    unsigned long *c;
+    unsigned long *d;
+
+    unsigned long noa;
+    unsigned long nob;
+    unsigned long noc;
+
+    double *aDest;
+    double *bDest;
+    double *cDest;
+    
+    a = (unsigned long *)precord->a;
+    b = (double *)precord->b;
+    c = (unsigned long *)precord->c;
+
+    aDest = (double *)precord->vala;
+    bDest = (double *)precord->valb;
+    cDest = (double *)precord->valc;
+
+    noa = precord->noa;
+    nob = precord->nob;
+    noc = precord->noc;
+
+    dbGetLink(&precord->inpa, DBR_ULONG, precord->a, 0, &noa);
+    dbGetLink(&precord->inpb, DBR_DOUBLE, precord->b, 0, &nob);
+
+    for(i=0;i<precord->nova;i++)
+    {
+        if((c[0] > 0)&&(c[0] <= a[0]))
+        {
+            aDest[i] = sqrt(bDest[i]*bDest[i]*(c[0]-1)/c[0] + b[i]*b[i]/c[0]);
+            if(c[0] == a[0])
+                cDest[i] = aDest[i];
+        }
+        else
+        {
+            aDest[i] = 0;
+            bDest[i] = 0;
+        }
+    }
+
+    for(i=0;i<precord->noc;i++){
+        if(c[i] < a[i])
+        {
+            c[i]++;
+        }
+        else
+        {
+            c[i] = 0;
+        }
+    }
+
+    memcpy(bDest, aDest, nob);
+    
     return 0;
 }
 
