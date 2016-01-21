@@ -131,9 +131,9 @@ static long variance(aSubRecord *precord)
     {
         if((c[0] > 0)&&(c[0] <= a[0]))
         {
-            aDest[i] = sqrt(bDest[i]*bDest[i]*(c[0]-1)/c[0] + b[i]*b[i]/c[0]);
+            aDest[i] = bDest[i]+ b[i]*b[i];
             if(c[0] == a[0])
-                cDest[i] = aDest[i];
+                cDest[i] = sqrt(aDest[i]/c[0]);
         }
         else
         {
@@ -153,7 +153,9 @@ static long variance(aSubRecord *precord)
         }
     }
 
-    memcpy(bDest, aDest, nob);
+    for(i=0;i<precord->nova;i++){
+        bDest[i] = aDest[i];
+    }
     
     return 0;
 }

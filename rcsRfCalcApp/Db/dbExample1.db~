@@ -1,10 +1,10 @@
 record(aSub,"$(user):asub1") {
-	field(SNAM,"myAsubProcess")
+	field(SNAM,"variance")
 	field(SCAN,"1 second")
 	field(FTA, "ULONG")
 	field(FTC, "ULONG")
 	field(INPA, "100")
-	field(INPB, "rcs:cpci9110:wf_amp_skew NPP NMS")
+	field(INPB, "rcs:cpci9110:xwf_amp_skew NPP NMS")
 	field(FTB, "DOUBLE")
 	field(NOA, "1")
 	field(NOB, "2048")
